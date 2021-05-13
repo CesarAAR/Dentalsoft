@@ -16,7 +16,7 @@ public class Citas extends javax.swing.JFrame {
      */
     public Citas() {
         initComponents();
-        this.setResizable(false);//codigo para evitar que redimencionen la ventana
+        this.setResizable(false);//codigo para evitar que redimencionen el JFrame
     }
 
     /**
