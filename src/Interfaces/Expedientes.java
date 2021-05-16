@@ -16,6 +16,7 @@ public class Expedientes extends javax.swing.JFrame {
      */
     public Expedientes() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
