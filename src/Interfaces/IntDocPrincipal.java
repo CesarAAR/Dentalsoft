@@ -100,7 +100,9 @@ public class IntDocPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        Expedientes abrirventanaEXP = new Expedientes(); //instanciamos un objeto de la clase Asistente
+        abrirventanaEXP.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
