@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Interfaces;
+import conexionSQL.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,7 +17,8 @@ import javax.swing.JOptionPane;
  * @author cachi
  */
 public class Login extends javax.swing.JFrame {
-
+        Conexion cc=new Conexion();
+        Connection con=cc.conectar();
     
     /**
      * Creates new form Login
@@ -110,22 +112,45 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IntDocPrincipal abrirventanaDoc = new IntDocPrincipal(); //instanciamos un objeto de la clase Asistente
-        IntAsisPrincipal abrirventanaAsistent = new IntAsisPrincipal(); //instanciamos un objeto de la clase Asistente
-        String TipoU=(String)jComboBox1.getSelectedItem();
-       
-                if(TipoU.equals("DOCTORA")){
-                     JOptionPane.showMessageDialog(null,"BIENVENIDO DOCTORA");
-                     abrirventanaDoc.setVisible(true);
-                     dispose();
-                 }else if(TipoU.equals("ASISTENTE")){
-                     JOptionPane.showMessageDialog(null,"BIENVENIDO ASISTENTE");
-                     abrirventanaAsistent.setVisible(true);
-                     dispose();
-                }
-        
+        ValidarUsuario();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void ValidarUsuario(){
+        int res=0;
+        IntDocPrincipal abrirventanaDoc = new IntDocPrincipal(); //instanciamos un objeto de la clase Doctor
+        IntAsisPrincipal abrirventanaAsistent = new IntAsisPrincipal(); //instanciamos un objeto de la clase Asistente
+        String TipoU=(String)jComboBox1.getSelectedItem();
+        String Pass= jTextField2.getText();
+        String cos="select * from USUARIO WHERE USUARIO='"+TipoU+"' and PASS='"+Pass+"'  ";
+        
+        
+        try{
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery(cos);
+            
+                if(rs.next()){
+                    res=1;
+                    if(res==1){
+                         if(TipoU.equals("DOCTORA")){
+                                 JOptionPane.showMessageDialog(null,"BIENVENIDO DOCTORA");
+                                 abrirventanaDoc.setVisible(true);
+                                 dispose();
+                        }else if(TipoU.equals("ASISTENTE")){
+                                 JOptionPane.showMessageDialog(null,"BIENVENIDO ASISTENTE");
+                                 abrirventanaAsistent.setVisible(true);
+                                 dispose();
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"ERROR USUARIO NO REGISTRADO");
+                }
+        
+        }
+        
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error de conexion"+e.getMessage());
+        }
+    }
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
