@@ -5,18 +5,35 @@
  */
 package Interfaces;
 
+import javax.swing.table.DefaultTableModel;
+import conexionSQL.Conexion;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author cachi
  */
 public class GestionCitas extends javax.swing.JFrame {
-
+        Conexion cc=new Conexion();
+        Connection con=cc.conectar();
     /**
      * Creates new form GestionCitas
      */
     public GestionCitas() {
         initComponents();
         this.setResizable(false);
+        MostrarCita("");
     }
 
     /**
@@ -29,10 +46,10 @@ public class GestionCitas extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtBNombre = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -54,7 +71,7 @@ public class GestionCitas extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(736, 449));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -73,23 +90,32 @@ public class GestionCitas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 58, 346, 370));
-
-        jLabel1.setText("Buscar por Nombre:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 150, -1));
-
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 70, -1));
+        jScrollPane1.setViewportView(Tabla);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 346, 370));
+
+        jLabel1.setText("Buscar por Nombre:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        txtBNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtBNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 150, -1));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 70, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -132,10 +158,10 @@ public class GestionCitas extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
 
         jButton3.setText("Eliminar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 70, -1));
 
         jButton4.setText("Salir");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
 
         jButton5.setText("Aceptar");
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
@@ -146,10 +172,64 @@ public class GestionCitas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+      MostrarCita(txtBNombre.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void txtBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBNombreActionPerformed
+
+    private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
+        Visualizar();
+    }//GEN-LAST:event_TablaMouseClicked
+    
+    public void Visualizar(){
+        int fila=Tabla.getSelectedRow();
+        if(fila>=0){
+            jTextField2.setText(Tabla.getValueAt(fila,1).toString());
+            jTextArea1.setText(Tabla.getValueAt(fila, 2).toString());
+    
+        }else{
+            JOptionPane.showMessageDialog(null,"Eroro");
+        }
+    }
+    
+    
+    public void MostrarCita(String Nombre){
+        DefaultTableModel tabla=new DefaultTableModel();
+        tabla.addColumn("ID");
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Asunto");
+        tabla.addColumn("Fecha");
+        tabla.addColumn("Hora");
+        Tabla.setModel(tabla);
+        String cons=" ";
+        if(Nombre.equals("")){
+            cons="Select * from Citas";
+        }else{
+            cons="Select * from Citas where nombre_paciente like'%"+Nombre+"%'";
+        }  
+        String datos[] = new String[5];
+        Statement st;
+            try {
+                st = con.createStatement();
+                ResultSet rs = st.executeQuery(cons);
+                while(rs.next()){
+                    datos[0]=rs.getString(1);
+                    datos[1]=rs.getString(2);
+                    datos[2]=rs.getString(3);
+                    datos[3]=rs.getString(4);
+                    datos[4]=rs.getString(5);
+                    tabla.addRow(datos);
+                }
+                Tabla.setModel(tabla);
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -186,7 +266,8 @@ public class GestionCitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Tabla;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -202,9 +283,8 @@ public class GestionCitas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtBNombre;
     // End of variables declaration//GEN-END:variables
 }
