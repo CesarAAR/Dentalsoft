@@ -7,14 +7,14 @@ package Interfaces;
 
 import conexionSQL.Conexion;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-
+import java.util.Date;
 /**
  *
  * @author cachi
@@ -29,7 +29,8 @@ public class Citas extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);//codigo para evitar que redimencionen el JFrame
     }
-
+        
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,14 +137,15 @@ public class Citas extends javax.swing.JFrame {
 
     public void AgregarCita(){
         String cos="Insert Into Citas(nombre_paciente,asunto,fecha_cita,hora_cita) values(?,?,?,?)";
-        
-        
+        Date date = new Date();        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaComoCadena = sdf.format(jDateChooser2.getDate());
         try{
             PreparedStatement pst=con.prepareStatement(cos);
             
                pst.setString(1, jTextField1.getText());
                pst.setString(2, jTextArea1.getText());
-               pst.setString(3, jDateChooser2.getDate().toString());
+               pst.setString(3, fechaComoCadena);
                pst.setString(4, jComboBox2.getSelectedItem().toString());
                
                pst.executeUpdate();

@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -58,13 +59,13 @@ public class GestionCitas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        txtH = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(736, 449));
@@ -145,9 +146,6 @@ public class GestionCitas extends javax.swing.JFrame {
         jLabel5.setText("Hora:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Selecciona una opcion--", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 150, -1));
-
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DXDDDXDDXD.png"))); // NOI18N
@@ -167,7 +165,13 @@ public class GestionCitas extends javax.swing.JFrame {
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
         jButton6.setText("Cancelar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
+        getContentPane().add(txtH, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,15 +187,25 @@ public class GestionCitas extends javax.swing.JFrame {
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
         Visualizar();
     }//GEN-LAST:event_TablaMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
     
     public void Visualizar(){
         int fila=Tabla.getSelectedRow();
         if(fila>=0){
-            jTextField2.setText(Tabla.getValueAt(fila,1).toString());
-            jTextArea1.setText(Tabla.getValueAt(fila, 2).toString());
-    
-        }else{
-            JOptionPane.showMessageDialog(null,"Eroro");
+         
+            try {
+                jTextField2.setText(Tabla.getValueAt(fila,1).toString());
+                jTextArea1.setText(Tabla.getValueAt(fila, 2).toString());
+                String fechas= (String) Tabla.getModel().getValueAt(fila, 3);
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                jDateChooser2.setDate(df.parse(fechas));
+                txtH.setText(Tabla.getValueAt(fila, 4).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -273,7 +287,6 @@ public class GestionCitas extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -286,5 +299,6 @@ public class GestionCitas extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField txtBNombre;
+    private javax.swing.JTextField txtH;
     // End of variables declaration//GEN-END:variables
 }
