@@ -66,6 +66,8 @@ public class GestionCitas extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         txtH = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(736, 449));
@@ -120,8 +122,8 @@ public class GestionCitas extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Nombre Paciente:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
+        jLabel2.setText("ID");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, -1, -1));
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -153,9 +155,19 @@ public class GestionCitas extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, -1, -1));
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 70, -1));
 
         jButton4.setText("Salir");
@@ -172,6 +184,12 @@ public class GestionCitas extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
         getContentPane().add(txtH, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, 110, -1));
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 80, -1));
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setText("Nombre Paciente:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,12 +209,21 @@ public class GestionCitas extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Actualizar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Eliminar();
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     public void Visualizar(){
         int fila=Tabla.getSelectedRow();
         if(fila>=0){
          
             try {
+                txtId.setText(Tabla.getValueAt(fila,0).toString());
                 jTextField2.setText(Tabla.getValueAt(fila,1).toString());
                 jTextArea1.setText(Tabla.getValueAt(fila, 2).toString());
                 String fechas= (String) Tabla.getModel().getValueAt(fila, 3);
@@ -209,7 +236,47 @@ public class GestionCitas extends javax.swing.JFrame {
         }
     }
     
+    public void limpiarCampos(){
+        txtId.setText(" ");
+        jTextField2.setText(" ");
+        jTextArea1.setText(" ");
+        jDateChooser2.setDate(null);
+        txtH.setText(" ");
+    }
     
+    public void Actualizar(){
+        java.util.Date date = new java.util.Date();        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaComoCadena = sdf.format(jDateChooser2.getDate());
+        String idCita="";
+        try{
+            PreparedStatement act;
+            act = con.prepareStatement("Update Citas set nombre_paciente='"
+                    +jTextField2.getText()+"',asunto='"+jTextArea1.getText()+"',fecha_cita='"+fechaComoCadena+"',hora_cita='"
+                    +txtH.getText()+"'where id_Cita='"+txtId.getText()+"'");
+            act.executeUpdate();
+            MostrarCita("");
+        }
+        catch (SQLException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void Eliminar(){
+        int f=Tabla.getSelectedColumn();
+        String idCita=Tabla.getValueAt(f,0).toString();
+        int bR=JOptionPane.showConfirmDialog(null,"¿Eliminar Registro?","ADIOS POPO",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+         if(bR==JOptionPane.YES_NO_OPTION){
+            try {
+                PreparedStatement borrar=con.prepareStatement("Delete from Citas where id_Cita='"+idCita+"'");
+                borrar.executeUpdate();
+                MostrarCita("");
+                limpiarCampos();
+            } catch (SQLException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+    }
     public void MostrarCita(String Nombre){
         DefaultTableModel tabla=new DefaultTableModel();
         tabla.addColumn("ID");
@@ -223,7 +290,9 @@ public class GestionCitas extends javax.swing.JFrame {
             cons="Select * from Citas";
         }else{
             cons="Select * from Citas where nombre_paciente like'%"+Nombre+"%'";
-        }  
+        }
+   
+        
         String datos[] = new String[5];
         Statement st;
             try {
@@ -294,11 +363,13 @@ public class GestionCitas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField txtBNombre;
     private javax.swing.JTextField txtH;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
