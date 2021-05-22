@@ -11,7 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 /**
  *
  * @author cachi
@@ -113,15 +116,25 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ValidarUsuario();
+        cambiarContra();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    public void cambiarContra(){
+        String Pass= jTextField2.getText();
+        nCotra nc=new nCotra();
+        String US=(String)jComboBox1.getSelectedItem();
+                 if(Pass.equals("123")){
+                    JOptionPane.showMessageDialog(null,"Por motivos de seguridad le pedimos que actualize la contraseña");
+                    nc.setVisible(true);
+            }   
+    }
     public void ValidarUsuario(){
         int res=0;
         IntDocPrincipal abrirventanaDoc = new IntDocPrincipal(); //instanciamos un objeto de la clase Doctor
         IntAsisPrincipal abrirventanaAsistent = new IntAsisPrincipal(); //instanciamos un objeto de la clase Asistente
         String TipoU=(String)jComboBox1.getSelectedItem();
         String Pass= jTextField2.getText();
-        String cos="select * from USUARIO WHERE USUARIO='"+TipoU+"' and PASS='"+Pass+"'  ";
+        String cos="select * from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'  ";
         
         
         try{

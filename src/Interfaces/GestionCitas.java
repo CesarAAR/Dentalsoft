@@ -248,7 +248,6 @@ public class GestionCitas extends javax.swing.JFrame {
         java.util.Date date = new java.util.Date();        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaComoCadena = sdf.format(jDateChooser2.getDate());
-        String idCita="";
         try{
             PreparedStatement act;
             act = con.prepareStatement("Update Citas set nombre_paciente='"
