@@ -5,20 +5,34 @@
  */
 package Interfaces;
 
+import conexionSQL.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author cachi
  */
 public class Expedientes extends javax.swing.JFrame {
-
+String esmalte="",dentina="",raiz="",huesos="",encia="",velo="",carrillos="",insercion="",sobre="",desgaste="",intercuspideo="",desmayos="",vertigos="",
+        embarazada="",onoclusion="";
+String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
     /**
      * Creates new form Expedientes
      */
     public Expedientes() {
         initComponents();
         this.setResizable(false);
+        this.setExtendedState(MAXIMIZED_BOTH);
+        
     }
+    
 
+      Conexion cc=new Conexion();
+        Connection con=cc.conectar();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +87,9 @@ public class Expedientes extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(734, 444));
@@ -89,30 +106,21 @@ public class Expedientes extends javax.swing.JFrame {
         jLabel3.setText("Telefono:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        jTextField1.setText("******");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, -1));
-
-        jTextField2.setText("jTextField2");
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 200, -1));
-
-        jTextField3.setText("jTextField3");
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
 
         jLabel4.setText("Ocupacion:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
-
-        jTextField4.setText("jTextField4");
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 200, -1));
 
         jLabel5.setText("Edad:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
-
-        jTextField5.setText("jTextField5");
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 60, -1));
 
         jLabel6.setText("Sexo:");
@@ -122,7 +130,7 @@ public class Expedientes extends javax.swing.JFrame {
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 80, -1));
 
         jLabel7.setText("Sintomas");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel9.setText("EXAMEN DE TEJIDOS");
 
@@ -130,6 +138,11 @@ public class Expedientes extends javax.swing.JFrame {
         ESMALTE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ESMALTEMouseClicked(evt);
+            }
+        });
+        ESMALTE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ESMALTEActionPerformed(evt);
             }
         });
 
@@ -144,6 +157,11 @@ public class Expedientes extends javax.swing.JFrame {
         RAIZ.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RAIZMouseClicked(evt);
+            }
+        });
+        RAIZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RAIZActionPerformed(evt);
             }
         });
 
@@ -196,7 +214,7 @@ public class Expedientes extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
 
         jLabel10.setText("BLANDOS");
 
@@ -265,7 +283,7 @@ public class Expedientes extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 210, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 210, -1));
 
         jLabel11.setText("OCLUSION");
 
@@ -391,7 +409,7 @@ public class Expedientes extends javax.swing.JFrame {
                     .addComponent(OTROS)))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, -1, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, -1));
 
         jLabel12.setText("HABITOS");
 
@@ -430,16 +448,16 @@ public class Expedientes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MORDIDA)
                             .addComponent(BRICOMANIA))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CONTRACCIONES)
-                            .addComponent(BUCAL))))
+                            .addComponent(BUCAL)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel12)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -457,16 +475,38 @@ public class Expedientes extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
 
         jButton1.setText("Crear Expediente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 210, -1));
 
         jButton2.setText("Nuevo Expediente");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 210, -1));
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 210, -1));
+
+        jLabel8.setText("Descripcion");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, -1, -1));
+
+        jScrollPane1.setViewportView(jTextPane1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 380, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -476,55 +516,55 @@ public class Expedientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void ESMALTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ESMALTEMouseClicked
-        
+        esmalte="Esmalte";
     }//GEN-LAST:event_ESMALTEMouseClicked
 
     private void DENTINAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DENTINAMouseClicked
-        
+        dentina=", Dentina";
     }//GEN-LAST:event_DENTINAMouseClicked
 
     private void RAIZMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RAIZMouseClicked
-        
+        raiz=", Raiz";
     }//GEN-LAST:event_RAIZMouseClicked
 
     private void HUESOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HUESOSMouseClicked
-        
+        huesos=", Huesos";
     }//GEN-LAST:event_HUESOSMouseClicked
 
     private void HUESOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HUESOSActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_HUESOSActionPerformed
 
     private void ENCIAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ENCIAMouseClicked
-        
+        encia=", Encia";
     }//GEN-LAST:event_ENCIAMouseClicked
 
     private void VELOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VELOMouseClicked
-        
+        velo=", Velo";
     }//GEN-LAST:event_VELOMouseClicked
 
     private void INSERCIONMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_INSERCIONMouseClicked
-        
+        insercion=", Insercion";
     }//GEN-LAST:event_INSERCIONMouseClicked
 
     private void CARRILLOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CARRILLOSMouseClicked
-        
+        carrillos=", Carrillos";
     }//GEN-LAST:event_CARRILLOSMouseClicked
 
     private void DESMAYOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DESMAYOSMouseClicked
-        
+        desmayos=", Desmayos";
     }//GEN-LAST:event_DESMAYOSMouseClicked
 
     private void EMBARAZADAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EMBARAZADAMouseClicked
-        
+        embarazada=", Embarazada";
     }//GEN-LAST:event_EMBARAZADAMouseClicked
 
     private void ONOCLUSIONMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ONOCLUSIONMouseClicked
-        
+        onoclusion=", Onoclusion";
     }//GEN-LAST:event_ONOCLUSIONMouseClicked
 
     private void MAREOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MAREOSMouseClicked
-        
+        mareos=", Mareos";
     }//GEN-LAST:event_MAREOSMouseClicked
 
     private void MAREOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAREOSActionPerformed
@@ -532,15 +572,15 @@ public class Expedientes extends javax.swing.JFrame {
     }//GEN-LAST:event_MAREOSActionPerformed
 
     private void OTROSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OTROSMouseClicked
-        
+        otros=", Otros";
     }//GEN-LAST:event_OTROSMouseClicked
 
     private void SOBREMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SOBREMouseClicked
-        
+       sobre=", Sobre mordida vertical";
     }//GEN-LAST:event_SOBREMouseClicked
 
     private void DESGASTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DESGASTEMouseClicked
-        
+        desgaste=", Desgaste"; 
     }//GEN-LAST:event_DESGASTEMouseClicked
 
     private void INTERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_INTERMouseClicked
@@ -548,25 +588,86 @@ public class Expedientes extends javax.swing.JFrame {
     }//GEN-LAST:event_INTERMouseClicked
 
     private void VERTIGOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VERTIGOSMouseClicked
-        
+        vertigos=", Vertigos";
     }//GEN-LAST:event_VERTIGOSMouseClicked
 
     private void BRICOMANIAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BRICOMANIAMouseClicked
-       
+       bricomania=", Bricomania";
     }//GEN-LAST:event_BRICOMANIAMouseClicked
 
     private void MORDIDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MORDIDAMouseClicked
-        
+        mordida=", Habitos de Mordida";
     }//GEN-LAST:event_MORDIDAMouseClicked
 
     private void CONTRACCIONESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CONTRACCIONESMouseClicked
-        
+        contraccion=", Contracciones musculares";
     }//GEN-LAST:event_CONTRACCIONESMouseClicked
 
     private void BUCALMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BUCALMouseClicked
-        
+        bucal=", Respiracion bucal";
     }//GEN-LAST:event_BUCALMouseClicked
 
+    private void ESMALTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ESMALTEActionPerformed
+
+    }//GEN-LAST:event_ESMALTEActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+          String sintomas=esmalte+dentina+raiz+huesos+encia+velo+carrillos+insercion+sobre+desgaste+intercuspideo+desmayos+vertigos+
+        embarazada+onoclusion+mareos+otros+bricomania+contraccion+mordida+bucal;
+     
+           String cos="Insert Into expedientes(nombre_paciente, domicilio, telefono,ocupacion,edad,sexo,sintomas,descripcion) values(?,?,?,?,?,?,?,?)";
+           try{
+           PreparedStatement pst=con.prepareStatement(cos);
+           
+           pst.setString(1, jTextField1.getText());
+           pst.setString(2, jTextField2.getText());
+           pst.setString(3, jTextField3.getText());
+           pst.setString(4, jTextField4.getText());
+           pst.setString(5, jTextField5.getText());
+           pst.setString(6, jComboBox1.getSelectedItem().toString());
+           pst.setString(7, sintomas);
+           pst.setString(8, jTextPane1.getText());
+           
+           pst.executeUpdate();
+           JOptionPane.showMessageDialog(null, "Registro exitoso");
+           
+      
+           }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error en el registro"+e.getMessage());
+        }
+        
+        
+        
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void RAIZActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RAIZActionPerformed
+
+    }//GEN-LAST:event_RAIZActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+        Expedientes abrirventanaexpedientes = new Expedientes();
+        abrirventanaexpedientes.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+     
+        
+       
+          
+        
+        
+        
+        
+
+        
+    
     /**
      * @param args the command line arguments
      */
@@ -638,15 +739,18 @@ public class Expedientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
