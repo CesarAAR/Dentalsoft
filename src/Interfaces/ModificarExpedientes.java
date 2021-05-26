@@ -5,28 +5,37 @@
  */
 package Interfaces;
 
+import javax.swing.table.DefaultTableModel;
 import conexionSQL.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author cachi
  */
-public class Expedientes extends javax.swing.JFrame {
+public class ModificarExpedientes extends javax.swing.JFrame {
 String esmalte="",dentina="",raiz="",huesos="",encia="",velo="",carrillos="",insercion="",sobre="",desgaste="",intercuspideo="",desmayos="",vertigos="",
         embarazada="",onoclusion="";
 String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
     /**
      * Creates new form Expedientes
      */
-    public Expedientes() {
+    public ModificarExpedientes() {
         initComponents();
         this.setResizable(false);
-        this.setExtendedState(MAXIMIZED_BOTH);
+        MostrarExpedientes("");
         
     }
     
@@ -90,47 +99,59 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
+        jLabel13 = new javax.swing.JLabel();
+        txtBNombre = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane3 = new javax.swing.JTextPane();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(734, 444));
         setMinimumSize(new java.awt.Dimension(734, 444));
-        setPreferredSize(new java.awt.Dimension(734, 444));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 29, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
 
         jLabel2.setText("Domicilio:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
 
         jLabel3.setText("Telefono:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 200, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 200, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 200, -1));
+        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 200, -1));
 
         jLabel4.setText("Ocupacion:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 200, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
+        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 200, -1));
 
         jLabel5.setText("Edad:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
-        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 60, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, -1));
+        getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 60, -1));
 
         jLabel6.setText("Sexo:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Masculino", "Femenino" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 80, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 80, -1));
 
         jLabel7.setText("Sintomas");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 0, -1, -1));
 
         jLabel9.setText("EXAMEN DE TEJIDOS");
 
@@ -219,7 +240,7 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, -1, -1));
 
         jLabel10.setText("BLANDOS");
 
@@ -308,7 +329,7 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
                         .addContainerGap())))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 210, -1));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, 210, -1));
 
         jLabel11.setText("OCLUSION");
 
@@ -474,7 +495,7 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
                     .addComponent(OTROS)))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, -1));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
 
         jLabel12.setText("HABITOS");
 
@@ -560,23 +581,23 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, -1, -1));
 
-        jButton1.setText("Crear Expediente");
+        jButton1.setText("Modificar Expediente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 210, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 210, -1));
 
-        jButton2.setText("Nuevo Expediente");
+        jButton2.setText("Historial");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 210, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 0, 100, -1));
 
         jButton3.setText("Cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -584,14 +605,95 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 210, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, 210, -1));
 
         jLabel8.setText("Descripcion");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, -1, -1));
 
         jScrollPane1.setViewportView(jTextPane1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 380, 120));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 380, 120));
+
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Domicilio", "Telefono", "Ocupacion"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla.setToolTipText("");
+        Tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Tabla);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 330, 370));
+
+        jLabel13.setText("Buscar por Nombre:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
+
+        txtBNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtBNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 160, -1));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+
+        jTextPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextPane2.setEnabled(false);
+        jScrollPane3.setViewportView(jTextPane2);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 170, 80));
+
+        jTextPane3.setEnabled(false);
+        jScrollPane4.setViewportView(jTextPane3);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 190, 80));
+
+        jLabel15.setText("Sintomas");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
+
+        jLabel16.setText("Descripcion");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, -1, -1));
+
+        txtId.setEnabled(false);
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 90, -1));
+
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel14.setText("ID");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 100, -1));
+
+        jButton4.setText("Nueva Modificacion");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, 210, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -700,30 +802,22 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
        
           String sintomas=esmalte+dentina+raiz+huesos+encia+velo+carrillos+insercion+sobre+desgaste+intercuspideo+desmayos+vertigos+
         embarazada+onoclusion+mareos+otros+bricomania+contraccion+mordida+bucal;
-     
-           String cos="Insert Into expedientes(nombre_paciente, domicilio, telefono,ocupacion,edad,sexo,sintomas,descripcion) values(?,?,?,?,?,?,?,?)";
-           try{
-           PreparedStatement pst=con.prepareStatement(cos);
-           
-           pst.setString(1, jTextField1.getText());
-           pst.setString(2, jTextField2.getText());
-           pst.setString(3, jTextField3.getText());
-           pst.setString(4, jTextField4.getText());
-           pst.setString(5, jTextField5.getText());
-           pst.setString(6, jComboBox1.getSelectedItem().toString());
-           pst.setString(7, sintomas);
-           pst.setString(8, jTextPane1.getText());
-           
-           pst.executeUpdate();
-           JOptionPane.showMessageDialog(null, "Registro exitoso");
-           
+      PreparedStatement act;
+             
+      jTextPane2.setText(sintomas);
+      jTextPane3.setText(jTextPane1.getText());
       
-           }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Error en el registro"+e.getMessage());
+        try{
+            act = con.prepareStatement("Update expedientes set nombre_paciente='"
+                    +jTextField1.getText()+"',domicilio='"+jTextField2.getText()+"',telefono='"+jTextField3.getText()+"',ocupacion='"
+                    +jTextField4.getText()+"',edad='"+jTextField5.getText()+"',sexo='"+jComboBox1.getSelectedItem().toString()+"',sintomas='"+sintomas
+                    +"',descripcion='"+jTextPane1.getText()+"'where id_expedientes='"+txtId.getText()+"'");
+            act.executeUpdate();
+            MostrarExpedientes("");
+         }
+        catch (SQLException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -737,12 +831,9 @@ raiz=", Raiz";
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
-        Expedientes abrirventanaexpedientes = new Expedientes();
+        Historial abrirventanaexpedientes = new Historial();
         abrirventanaexpedientes.setVisible(true);
-        //esmalte=""; dentina="";raiz="";huesos="";encia="";velo=""; carrillos="";insercion="";sobre="";desgaste="";
-        //intercuspideo="";desmayos="";vertigos="";
-        //embarazada="";onoclusion="";
-         //mareos="";otros="";bricomania="";contraccion="";mordida="";bucal="";
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void DENTINAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DENTINAActionPerformed
@@ -813,14 +904,97 @@ raiz=", Raiz";
         bucal=", Respiracion bucal";
     }//GEN-LAST:event_BUCALActionPerformed
 
-     
+    private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
+        visualizar();
+    }//GEN-LAST:event_TablaMouseClicked
+
+    private void txtBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBNombreActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        MostrarExpedientes(txtBNombre.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+        ModificarExpedientes abrirventanaexpedientes = new ModificarExpedientes();
+        abrirventanaexpedientes.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+       
+      public void visualizar(){
+    int fila=Tabla.getSelectedRow();
+    if(fila>=0){
+
+         txtId.setText(Tabla.getValueAt(fila, 0).toString());
+        jTextField1.setText(Tabla.getValueAt(fila, 1).toString());
+        jTextField2.setText(Tabla.getValueAt(fila,2).toString());
+        jTextField3.setText(Tabla.getValueAt(fila, 3).toString());
+        jTextField4.setText(Tabla.getValueAt(fila, 4).toString());
+        jTextField5.setText(Tabla.getValueAt(fila, 5).toString());
+        jTextPane2.setText(Tabla.getValueAt(fila, 6).toString());
+        jTextPane3.setText(Tabla.getValueAt(fila, 7).toString());
         
+        
+  
+    }//if
+    }//visualizar
+    
+   
+    
+    
+          public void MostrarExpedientes(String Nombre){
+    DefaultTableModel tabla= new DefaultTableModel();
+    tabla.addColumn("ID");
+     tabla.addColumn("Nombre");
+     tabla.addColumn("Domicilio");
+     tabla.addColumn("Telefono");
+     tabla.addColumn("Ocupacion");
+     tabla.addColumn("Edad");
+     tabla.addColumn("Sintomas");
+     tabla.addColumn("Descripcion");
+
+    Tabla.setModel(tabla);
+    String cons=" ";
+    if(Nombre.equals("")){
+    cons="select id_expedientes,nombre_paciente,domicilio,telefono,ocupacion,edad,sintomas,descripcion from expedientes";
+    }else{
+        cons="Select id_expedientes,nombre_paciente,domicilio,telefono,ocupacion,edad,sintomas,descripcion from expedientes where nombre_paciente like'%"+Nombre+"%'";
+    }
+    
+    
+    
+    String datos [] = new String[8];
+    Statement st;
+    try{
+        st = con.createStatement();
+        ResultSet rs= st.executeQuery(cons);
+        while(rs.next()){
+             datos[0]=rs.getString(1);
+                    datos[1]=rs.getString(2);
+                    datos[2]=rs.getString(3);
+                    datos[3]=rs.getString(4);
+                    datos[4]=rs.getString(5);
+                    datos[5]=rs.getString(6);
+                    datos[6]=rs.getString(7);
+                    datos[7]=rs.getString(8);
+                    tabla.addRow(datos);
+        }
+         Tabla.setModel(tabla);
+    }catch (SQLException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          }
        
           
         
         
+         
+  
         
-        
+    
+      
 
         
     
@@ -841,20 +1015,21 @@ raiz=", Raiz";
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Expedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarExpedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Expedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarExpedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Expedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarExpedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Expedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModificarExpedientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Expedientes().setVisible(true);
+                new ModificarExpedientes().setVisible(true);
             }
         });
     }
@@ -879,16 +1054,23 @@ raiz=", Raiz";
     private javax.swing.JRadioButton OTROS;
     private javax.swing.JRadioButton RAIZ;
     private javax.swing.JRadioButton SOBRE;
+    private javax.swing.JTable Tabla;
     private javax.swing.JRadioButton VELO;
     private javax.swing.JRadioButton VERTIGOS;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -902,11 +1084,18 @@ raiz=", Raiz";
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPane3;
+    private javax.swing.JTextField txtBNombre;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
