@@ -12,9 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author cachi
@@ -128,32 +131,65 @@ public class Citas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       AgregarCita();
+            try {
+                AgregarCita();
+            } catch (ParseException ex) {
+                Logger.getLogger(Citas.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    public void AgregarCita(){
+    public void AgregarCita() throws ParseException{
         String cos="Insert Into Citas(nombre_paciente,asunto,fecha_cita,hora_cita) values(?,?,?,?)";
-        Date date = new Date();        
+        Date dateA = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaComoCadena = sdf.format(jDateChooser2.getDate());
-        try{
-            PreparedStatement pst=con.prepareStatement(cos);
+        String dateAA = sdf.format(dateA);
+        Date fecha1 = sdf.parse(fechaComoCadena);
+        Date fecha2 = sdf.parse(dateAA);
+        String Hora = jComboBox2.getSelectedItem().toString();
+        if(fecha1.equals(fecha2)){
+            JOptionPane.showMessageDialog(null, "Fecha no valida");
             
-               pst.setString(1, jTextField1.getText());
-               pst.setString(2, jTextArea1.getText());
-               pst.setString(3, fechaComoCadena);
-               pst.setString(4, jComboBox2.getSelectedItem().toString());
-               
-               pst.executeUpdate();
-               JOptionPane.showMessageDialog(null,"Registro exitoso");
         }
-        
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Error en el registro"+e.getMessage());
+        else if(fecha1.before(fecha2)){
+                JOptionPane.showMessageDialog(null, "Fecha no valida");
+        }
+        else if(Hora.equals("--Selecciona una opcion--")){
+            JOptionPane.showMessageDialog(null,"Seleccione una hora");
+            jComboBox2.requestFocus();
+        }
+        else if(Hora.equals("14:00") || Hora.equals("14:30") || Hora.equals("15:00") || Hora.equals("15:30")){
+            JOptionPane.showMessageDialog(null,"Horario fuera de servicio escoja otra hora por favor");
+        }
+        else{
+                try{
+                        Statement st = con.createStatement();
+                        ResultSet rs = st.executeQuery("SELECT fecha_cita,hora_cita FROM CITAS WHERE fecha_cita LIKE'"+
+                                fechaComoCadena+"' AND hora_cita LIKE '"+ Hora +"'");
+                        if(rs.next()){
+                            getToolkit().beep();
+                            JOptionPane.showMessageDialog(null,"Ya otra cita se encuentra registrada en esa fecha");
+                            jDateChooser2.requestFocus();
+                        }
+                        else{
+                                    PreparedStatement pst=con.prepareStatement(cos);
+                                    pst.setString(1, jTextField1.getText());
+                                    pst.setString(2, jTextArea1.getText());
+                                    pst.setString(3, fechaComoCadena);
+                                    pst.setString(4, Hora);
+
+                                    pst.executeUpdate();
+                                    JOptionPane.showMessageDialog(null,"Registro exitoso");
+                        }
+                }
+
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Error en el registro"+e.getMessage());
+            }
         }
     }
     

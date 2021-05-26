@@ -195,7 +195,8 @@ public class GestionCitas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-      MostrarCita(txtBNombre.getText());
+         MostrarCita(txtBNombre.getText());
+         datoNo();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNombreActionPerformed
@@ -245,7 +246,6 @@ public class GestionCitas extends javax.swing.JFrame {
     }
     
     public void Actualizar(){
-        java.util.Date date = new java.util.Date();        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaComoCadena = sdf.format(jDateChooser2.getDate());
         try{
@@ -276,6 +276,34 @@ public class GestionCitas extends javax.swing.JFrame {
             }
          }
     }
+    
+    public void datoNo(){
+        int r=0;
+        String Nombre=txtBNombre.getText();
+        try{
+          Statement st = con.createStatement();
+          ResultSet rs = st.executeQuery("SELECT nombre_paciente FROM CITAS WHERE nombre_paciente LIKE'"+Nombre+"'");  
+          if(rs.next()){
+               MostrarCita(Nombre);
+          }else{
+              r=1;
+              if(r==1){
+                 if(Nombre.equals("")){
+                    JOptionPane.showMessageDialog(null,"Ingrese un nombre");
+                    MostrarCita(txtBNombre.getText());
+                 }else{
+                    JOptionPane.showMessageDialog(null,"Nombre no encontrado");
+                    txtBNombre.setText("");
+                    MostrarCita(txtBNombre.getText());
+                 }
+              }
+          }
+        }catch (SQLException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+         }  
+    }
+    
+    
     public void MostrarCita(String Nombre){
         DefaultTableModel tabla=new DefaultTableModel();
         tabla.addColumn("ID");
@@ -288,13 +316,14 @@ public class GestionCitas extends javax.swing.JFrame {
         if(Nombre.equals("")){
             cons="Select * from Citas";
         }else{
-            cons="Select * from Citas where nombre_paciente like'%"+Nombre+"%'";
+            cons="Select * from Citas where nombre_paciente like'"+Nombre+"'";
         }
    
         
         String datos[] = new String[5];
         Statement st;
             try {
+                
                 st = con.createStatement();
                 ResultSet rs = st.executeQuery(cons);
                 while(rs.next()){
