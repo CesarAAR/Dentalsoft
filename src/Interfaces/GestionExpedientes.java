@@ -35,6 +35,7 @@ public class GestionExpedientes extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         MostrarExpediente("");
+        deshabilitarCampos();
     }
 
     /**
@@ -77,12 +78,20 @@ public class GestionExpedientes extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(841, 599));
+        setMinimumSize(new java.awt.Dimension(841, 599));
+        setPreferredSize(new java.awt.Dimension(841, 599));
 
         jLabel1.setText("Buscar por Nombre:");
 
         txtBNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBNombreActionPerformed(evt);
+            }
+        });
+        txtBNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBNombreKeyTyped(evt);
             }
         });
 
@@ -128,6 +137,8 @@ public class GestionExpedientes extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Nombre Paciente:");
+
+        jTextField2.setMaximumSize(new java.awt.Dimension(841, 599));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -317,7 +328,7 @@ public class GestionExpedientes extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton3)
                             .addComponent(jButton4))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -347,6 +358,8 @@ dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        IntDocPrincipal abrirventanaDOC = new IntDocPrincipal();
+        abrirventanaDOC.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -354,6 +367,17 @@ dispose();
        Historial abrirventanaexpedientes = new Historial();
         abrirventanaexpedientes.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtBNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBNombreKeyTyped
+        char c=evt.getKeyChar();
+        if(Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        String cad=(""+c).toUpperCase();
+        c=cad.charAt(0);
+        evt.setKeyChar(c);
+    }//GEN-LAST:event_txtBNombreKeyTyped
 
     
     
@@ -395,7 +419,7 @@ dispose();
     if(Nombre.equals("")){
     cons="select * from expedientes";
     }else{
-        cons="Select * from expedientes where nombre_paciente like'%"+Nombre+"%'";
+        cons="Select * from expedientes where nombre_paciente like'"+Nombre+"%'";
     }
     
     String datos [] = new String[9];
@@ -422,7 +446,34 @@ dispose();
     
     }//mostrar expediente
     
-    
+    public void deshabilitarCampos(){
+        txtId.setEnabled(false);
+        txtId.setEditable(false);
+        
+        jTextField2.setEnabled(false);
+        jTextField2.setEditable(false);
+        
+        jTextField3.setEnabled(false);
+        jTextField3.setEditable(false);
+        
+        jTextField4.setEnabled(false);
+        jTextField4.setEditable(false);
+        
+        jTextField5.setEnabled(false);
+        jTextField5.setEditable(false);
+        
+        jTextField6.setEnabled(false);
+        jTextField6.setEditable(false);
+        
+        jTextField7.setEnabled(false);
+        jTextField7.setEditable(false);
+        
+        jTextPane1.setEnabled(false);
+        jTextPane1.setEditable(false);
+        
+        jTextPane2.setEnabled(false);
+        jTextPane2.setEditable(false);
+    }
     
      public void limpiarCampos(){
         txtId.setText(" ");

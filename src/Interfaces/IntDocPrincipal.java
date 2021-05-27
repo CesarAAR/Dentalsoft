@@ -87,22 +87,25 @@ public class IntDocPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       Expedientes abrirventanaEX = new Expedientes(); //instanciamos un objeto de la clase Citas
+       abrirventanaEX.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       GestionExpedientes abrirventanaGEX = new GestionExpedientes(); //instanciamos un objeto de la clase Citas
+       abrirventanaGEX.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        Citas abrirventanacitas = new Citas(); //instanciamos un objeto de la clase Citas
-       abrirventanacitas.setVisible(true);
+       abrirventanacitas.setVisible(true);  
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         GestionCitas citas = new GestionCitas(); //instanciamos un objeto de la clase Asistente
         citas.setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

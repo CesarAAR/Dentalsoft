@@ -26,7 +26,7 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
     public Expedientes() {
         initComponents();
         this.setResizable(false);
-        this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setExtendedState(MAXIMIZED_BOTH);
         
     }
     
@@ -92,9 +92,9 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
         jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(734, 444));
-        setMinimumSize(new java.awt.Dimension(734, 444));
-        setPreferredSize(new java.awt.Dimension(734, 444));
+        setMaximumSize(new java.awt.Dimension(774, 594));
+        setMinimumSize(new java.awt.Dimension(774, 594));
+        setPreferredSize(new java.awt.Dimension(774, 594));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Nombre:");
@@ -111,16 +111,44 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, -1));
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 200, -1));
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
 
         jLabel4.setText("Ocupacion:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField4KeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 200, -1));
 
         jLabel5.setText("Edad:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 60, -1));
 
         jLabel6.setText("Sexo:");
@@ -732,13 +760,48 @@ raiz=", Raiz";
     }//GEN-LAST:event_RAIZActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        IntDocPrincipal abrirventanaDOC = new IntDocPrincipal();
+        abrirventanaDOC.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jComboBox1.setSelectedIndex(0);
+        ESMALTE.setSelected(false);
+        DENTINA.setSelected(false);
+        RAIZ.setSelected(false);
+        HUESOS.setSelected(false);
+        ENCIA.setSelected(false);
+        VELO.setSelected(false);
+        CARRILLOS.setSelected(false);
+        INSERCION.setSelected(false);
+        SOBRE.setSelected(false);
+        DESGASTE.setSelected(false);
+        INTER.setSelected(false);
+        DESMAYOS.setSelected(false);
+        VERTIGOS.setSelected(false);
+        EMBARAZADA.setSelected(false);
+        ONOCLUSION.setSelected(false);
+        MAREOS.setSelected(false);
+        OTROS.setSelected(false);
+        BRICOMANIA.setSelected(false);
+        CONTRACCIONES.setSelected(false);
+        MORDIDA.setSelected(false);
+        BUCAL.setSelected(false);
+        jTextPane1.setText("");
+         esmalte="";dentina="";raiz="";huesos="";encia="";velo="";carrillos="";
+         insercion="";sobre="";desgaste="";intercuspideo="";desmayos="";vertigos="";
+        embarazada="";onoclusion="";
+        mareos="";
+        otros="";bricomania="";contraccion="";mordida="";bucal="";
+        /*dispose();
         Expedientes abrirventanaexpedientes = new Expedientes();
-        abrirventanaexpedientes.setVisible(true);
+        abrirventanaexpedientes.setVisible(true);*/
         //esmalte=""; dentina="";raiz="";huesos="";encia="";velo=""; carrillos="";insercion="";sobre="";desgaste="";
         //intercuspideo="";desmayos="";vertigos="";
         //embarazada="";onoclusion="";
@@ -812,6 +875,54 @@ raiz=", Raiz";
     private void BUCALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUCALActionPerformed
         bucal=", Respiracion bucal";
     }//GEN-LAST:event_BUCALActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char c=evt.getKeyChar();
+        if(Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        String cad=(""+c).toUpperCase();
+        c=cad.charAt(0);
+        evt.setKeyChar(c);
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+        char c=evt.getKeyChar();
+        if(Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        String cad=(""+c).toUpperCase();
+        c=cad.charAt(0);
+        evt.setKeyChar(c);
+    }//GEN-LAST:event_jTextField4KeyTyped
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        char c=evt.getKeyChar();
+        if(Character.isLetter(c)){
+            getToolkit().beep();
+            evt.consume();
+        }
+        if (jTextField3.getText().length()== 10){
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        char c=evt.getKeyChar();
+        if(Character.isLetter(c)){
+            getToolkit().beep();
+            evt.consume();
+        }
+        if (jTextField5.getText().length()== 2){
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_jTextField5KeyTyped
 
      
         
