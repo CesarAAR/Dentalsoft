@@ -146,6 +146,8 @@ public class nCotra extends javax.swing.JFrame {
         String nuevaC=jPasswordField1.getText();
         String confirmarC=jPasswordField2.getText();
         String TipoU=(String)jComboBox1.getSelectedItem();
+         int bR=JOptionPane.showConfirmDialog(null,"¿ACTUALIZAR CONTRASEÑA?","CONTRASEÑA",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+         if(bR==JOptionPane.YES_NO_OPTION){
         if(nuevaC.equals(confirmarC)){
             try{
                 PreparedStatement act;
@@ -160,7 +162,8 @@ public class nCotra extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"La constraseñas no son iguales");
             jPasswordField1.setText("");
             jPasswordField2.setText("");
-        }         
+        }   
+       }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

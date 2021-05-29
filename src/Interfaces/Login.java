@@ -120,21 +120,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
     
     public void cambiarContra(){
-        String Pass= jTextField2.getText();
-        nCotra nc=new nCotra();
-        String US=(String)jComboBox1.getSelectedItem();
-                 if(Pass.equals("123")){
+        String Pass= "123 ";
+        nCotra nc=new nCotra();  
+        String TipoU=(String)jComboBox1.getSelectedItem();
+        String cos="select PASS from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'";
+            try {
+                Statement st = con.createStatement();                                        
+                ResultSet rs = st.executeQuery(cos);
+                if(rs.next()){
                     JOptionPane.showMessageDialog(null,"Por motivos de seguridad le pedimos que actualize la contraseña");
                     nc.setVisible(true);
-            }   
+                    
+                }   
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                 
     }
+    
+    
+    
     public void ValidarUsuario(){
         int res=0;
         IntDocPrincipal abrirventanaDoc = new IntDocPrincipal(); //instanciamos un objeto de la clase Doctor
         IntAsisPrincipal abrirventanaAsistent = new IntAsisPrincipal(); //instanciamos un objeto de la clase Asistente
         String TipoU=(String)jComboBox1.getSelectedItem();
         String Pass= jTextField2.getText();
-        String cos="select * from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'  ";
+        String cos="select * from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'";
         
         
         try{

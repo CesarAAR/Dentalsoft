@@ -190,6 +190,8 @@ public class Citas extends javax.swing.JFrame {
         Date fecha1 = sdf.parse(fechaComoCadena);
         Date fecha2 = sdf.parse(dateAA);
         String Hora = jComboBox2.getSelectedItem().toString();
+        int bR=JOptionPane.showConfirmDialog(null,"¿AGREGAR Registro?","AGREGAR",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(bR==JOptionPane.YES_NO_OPTION){
         if(fecha1.equals(fecha2)){
             JOptionPane.showMessageDialog(null, "Fecha no valida");
             
@@ -230,6 +232,7 @@ public class Citas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Error en el registro"+e.getMessage());
             }
         }
+       }
     }
     
    

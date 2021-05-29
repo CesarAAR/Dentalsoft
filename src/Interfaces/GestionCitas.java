@@ -8,7 +8,7 @@ package Interfaces;
 import javax.swing.table.DefaultTableModel;
 import conexionSQL.Conexion;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -212,7 +212,11 @@ public class GestionCitas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Actualizar();
+            try {
+                Actualizar();
+            } catch (ParseException ex) {
+                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -245,26 +249,57 @@ public class GestionCitas extends javax.swing.JFrame {
         txtH.setText(" ");
     }
     
-    public void Actualizar(){
+    public void Actualizar() throws ParseException{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaComoCadena = sdf.format(jDateChooser2.getDate());
-        try{
-            PreparedStatement act;
-            act = con.prepareStatement("Update Citas set nombre_paciente='"
-                    +jTextField2.getText()+"',asunto='"+jTextArea1.getText()+"',fecha_cita='"+fechaComoCadena+"',hora_cita='"
-                    +txtH.getText()+"'where id_Cita='"+txtId.getText()+"'");
-            act.executeUpdate();
-            MostrarCita("");
-        }
-        catch (SQLException ex) {
-                Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int bR=JOptionPane.showConfirmDialog(null,"¿Actualizar Registro?","ACTUALIZAR",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        Date dateA = new Date();
+        String dateAA = sdf.format(dateA);
+        Date fecha1 = sdf.parse(fechaComoCadena);
+        Date fecha2 = sdf.parse(dateAA);
+        String Hora = txtH.getText();
+        if(bR==JOptionPane.YES_NO_OPTION){
+            if(fecha1.equals(fecha2)){
+                JOptionPane.showMessageDialog(null, "Fecha no valida");
+
+            }
+            else if(fecha1.before(fecha2)){
+                    JOptionPane.showMessageDialog(null, "Fecha no valida");
+            }
+            else if(Hora.equals("14:00") || Hora.equals("14:30") || Hora.equals("15:00") || Hora.equals("15:30")){
+                JOptionPane.showMessageDialog(null,"Horario fuera de servicio escoja otra hora por favor");
+                txtH.requestFocus();
+            }
+            else{
+                try{
+                        Statement st = con.createStatement();
+                        ResultSet rs = st.executeQuery("SELECT fecha_cita,hora_cita FROM CITAS WHERE fecha_cita LIKE'"+
+                                fechaComoCadena+"' AND hora_cita LIKE '"+ Hora +"'");
+                        if(rs.next()){
+                            getToolkit().beep();
+                            JOptionPane.showMessageDialog(null,"Ya otra cita se encuentra registrada en esa fecha");
+                            jDateChooser2.requestFocus();
+                        }else{
+                                PreparedStatement act;
+                                act = con.prepareStatement("Update Citas set nombre_paciente='"
+                                        +jTextField2.getText()+"',asunto='"+jTextArea1.getText()+"',fecha_cita='"+fechaComoCadena+"',hora_cita='"
+                                        +txtH.getText()+"'where id_Cita='"+txtId.getText()+"'");
+                                act.executeUpdate();
+                                limpiarCampos();
+                                MostrarCita("");
+                        }
+                }
+                catch (SQLException ex) {
+                        Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+         }
     }
     
     public void Eliminar(){
         int f=Tabla.getSelectedColumn();
         String idCita=Tabla.getValueAt(f,0).toString();
-        int bR=JOptionPane.showConfirmDialog(null,"¿Eliminar Registro?","ADIOS POPO",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int bR=JOptionPane.showConfirmDialog(null,"¿Eliminar Registro?","ELIMINAR",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
          if(bR==JOptionPane.YES_NO_OPTION){
             try {
                 PreparedStatement borrar=con.prepareStatement("Delete from Citas where id_Cita='"+idCita+"'");
