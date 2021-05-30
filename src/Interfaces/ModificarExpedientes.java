@@ -36,8 +36,7 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
         initComponents();
         this.setResizable(false);
         MostrarExpedientes("");
-        jTextField1.setEnabled(false);
-        jTextField1.setEditable(false);
+        deshabilitarCampos();
     }
     
 
@@ -822,21 +821,102 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
     }//GEN-LAST:event_ESMALTEActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+       boolean bandera=false;
           String sintomas=esmalte+dentina+raiz+huesos+encia+velo+carrillos+insercion+sobre+desgaste+intercuspideo+desmayos+vertigos+
         embarazada+onoclusion+mareos+otros+bricomania+contraccion+mordida+bucal;
       PreparedStatement act;
              
       jTextPane2.setText(sintomas);
       jTextPane3.setText(jTextPane1.getText());
-      
+      String nombre= "";
+        String domicilio = "";
+        String telefono = "";
+        String ocupacion = "";
+        //String edad = "";
+        int edadNumero = 0;
+        int opcionCB = jComboBox1.getSelectedIndex();
+        String opcion = jComboBox1.getSelectedItem().toString();
+        
+        String jtxt1 =jTextField1.getText();
+        jtxt1.replaceAll(" ", "");
+        
+        String jtxt2 =jTextField2.getText();
+        jtxt2.replaceAll(" ", "");
+        
+        String jtxt3 =jTextField3.getText();
+        jtxt3.replaceAll(" ", "");
+        
+        String jtxt4 =jTextField4.getText();
+        jtxt4.replaceAll(" ", "");
+        
+        String jtxt5 =jTextField5.getText();
+        jtxt5.replaceAll(" ", "");
+       
+           if(jtxt1.length()==0){
+               bandera=true;
+                JOptionPane.showMessageDialog(null,"No introdujo un nombre","Error al insertar",JOptionPane.WARNING_MESSAGE);
+                jTextField1.requestFocus();
+            }else{
+                nombre= jTextField1.getText();
+            }
+           if(jtxt2.length()==0){
+               bandera=true;
+                JOptionPane.showMessageDialog(null,"No introdujo un Domicilio","Error al insertar",JOptionPane.WARNING_MESSAGE);
+                jTextField2.requestFocus();
+            }else{
+                domicilio = jTextField2.getText();
+            }
+           if(jtxt3.length()==0 || jtxt3.length()<10){
+               bandera=true;
+                JOptionPane.showMessageDialog(null,"No introdujo un telefono o el telefono esta incompleto","Error al insertar",JOptionPane.WARNING_MESSAGE);
+                jTextField3.requestFocus();
+            }else{
+               telefono = jTextField3.getText();
+            }
+           if(jtxt4.length()==0){
+               bandera=true;
+                JOptionPane.showMessageDialog(null,"No introdujo una Ocupacion","Error al insertar",JOptionPane.WARNING_MESSAGE);
+                jTextField4.requestFocus();
+            }else{
+                ocupacion = jTextField4.getText();
+            }
+           int num = Integer.parseInt(jTextField5.getText());
+           if(jtxt5.length()==0 || num<1){
+               bandera=true;
+                JOptionPane.showMessageDialog(null,"No introdujo una edad correcta o dejo el campo vacio","Error al insertar",JOptionPane.WARNING_MESSAGE);
+                jTextField5.requestFocus();
+            }else{
+                edadNumero = Integer.parseInt(jTextField5.getText());
+            }
+           if(opcionCB==0){
+               bandera=true;
+                JOptionPane.showMessageDialog(null,"No selecciono un sexo valido","Error al insertar",JOptionPane.WARNING_MESSAGE);
+                jComboBox1.requestFocus();
+            }else{
+                opcion = jComboBox1.getSelectedItem().toString();
+            }
         try{
             act = con.prepareStatement("Update expedientes set nombre_paciente='"
-                    +jTextField1.getText()+"',domicilio='"+jTextField2.getText()+"',telefono='"+jTextField3.getText()+"',ocupacion='"
-                    +jTextField4.getText()+"',edad='"+jTextField5.getText()+"',sexo='"+jComboBox1.getSelectedItem().toString()+"',sintomas='"+sintomas
+                    +nombre+"',domicilio='"+domicilio+"',telefono='"+telefono+"',ocupacion='"
+                    +ocupacion+"',edad='"+edadNumero+"',sexo='"+opcion+"',sintomas='"+sintomas
                     +"',descripcion='"+jTextPane1.getText()+"'where id_expedientes='"+txtId.getText()+"'");
-            act.executeUpdate();
-            MostrarExpedientes("");
+            int resp=-1;
+            if(bandera){
+               JOptionPane.showMessageDialog(null,"Hubo un error, favor de solucionarlo.");
+           }else{
+             resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Modificar el expediente?", "Alerta!", JOptionPane.YES_NO_OPTION);
+             switch (resp) {
+             case 0:
+                 act.executeUpdate();
+                 MostrarExpedientes("");
+                 JOptionPane.showMessageDialog(null, "Modificacion exitosa");
+                 break;
+             case 1:
+                 break;
+             }
+           }
+            /*act.executeUpdate();
+            MostrarExpedientes("");*/
          }
         catch (SQLException ex) {
                 Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
@@ -936,7 +1016,16 @@ raiz=", Raiz";
     }//GEN-LAST:event_txtBNombreActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        MostrarExpedientes(txtBNombre.getText());
+        
+        String txtN =txtBNombre.getText();
+        txtN.replaceAll(" ", "");
+        
+        if(txtN.length()==0){
+            JOptionPane.showMessageDialog(null,"No introdujo un nombre por el cual buscar","Error al insertar",JOptionPane.WARNING_MESSAGE);   
+        }else{
+            MostrarExpedientes(txtBNombre.getText()); 
+        }
+        //MostrarExpedientes(txtBNombre.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1020,7 +1109,13 @@ raiz=", Raiz";
         c=cad.charAt(0);
         evt.setKeyChar(c);
     }//GEN-LAST:event_jTextField1KeyTyped
-
+    public void deshabilitarCampos(){
+            jTextField1.setEnabled(false);
+            jTextField1.setEditable(false);
+            
+            txtId.setEnabled(false);
+            txtId.setEditable(false);
+    }
        
       public void visualizar(){
     int fila=Tabla.getSelectedRow();

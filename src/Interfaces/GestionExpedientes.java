@@ -339,7 +339,14 @@ public class GestionExpedientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBNombreActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
- MostrarExpediente(txtBNombre.getText());      
+        String txtN =txtBNombre.getText();
+        txtN.replaceAll(" ", "");
+        
+        if(txtN.length()==0){
+            JOptionPane.showMessageDialog(null,"No introdujo un nombre por el cual buscar","Error al insertar",JOptionPane.WARNING_MESSAGE);   
+        }else{
+            MostrarExpediente(txtBNombre.getText()); 
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
@@ -347,14 +354,23 @@ public class GestionExpedientes extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-dispose();
         ModificarExpedientes abrirventanaexpedientes = new ModificarExpedientes();
         abrirventanaexpedientes.setVisible(true);
-        
+        dispose(); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
- EliminarExpediente();        
+    int resp=-1;
+    resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Eliminar el expediente?", "Alerta!", JOptionPane.YES_NO_OPTION);
+             switch (resp) {
+             case 0:
+                 EliminarExpediente(); 
+                 JOptionPane.showMessageDialog(null, "Registro Eliminado de manera exitosa");
+                 limpiarCampos();
+                 break;
+             case 1:
+                 break;
+             }       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

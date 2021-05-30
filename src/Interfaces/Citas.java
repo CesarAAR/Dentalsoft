@@ -71,7 +71,7 @@ public class Citas extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 100, 30));
 
-        jButton1.setText("Cancelar");
+        jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -147,11 +147,21 @@ public class Citas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            try {
-                AgregarCita();
-            } catch (ParseException ex) {
-                Logger.getLogger(Citas.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        int resp=-1;
+        resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Crear la Cita?", "Alerta!", JOptionPane.YES_NO_OPTION);
+             switch (resp) {
+             case 0:
+                try {
+                    AgregarCita();
+                    JOptionPane.showMessageDialog(null, "Se Creo la cita de forma exitosa");
+                    limpiarCampos();
+                } catch (ParseException ex) {
+                    Logger.getLogger(Citas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+             case 1:
+                 break;
+             }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed

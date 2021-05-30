@@ -290,7 +290,15 @@ Conexion cc=new Conexion();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        MostrarHistorial(txtBNombre.getText());
+        String txtN =txtBNombre.getText();
+        txtN.replaceAll(" ", "");
+        
+        if(txtN.length()==0){
+            JOptionPane.showMessageDialog(null,"No introdujo un nombre por el cual buscar","Error al insertar",JOptionPane.WARNING_MESSAGE);   
+        }else{
+            MostrarHistorial(txtBNombre.getText());
+        }
+        //MostrarHistorial(txtBNombre.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBNombreActionPerformed
@@ -353,7 +361,7 @@ Conexion cc=new Conexion();
     if(Nombre.equals("")){
     cons="select * from historial";
     }else{
-        cons="Select * from historial where nombre_paciente like'%"+Nombre+"%'";
+        cons="Select * from historial where nombre_paciente like'"+Nombre+"%'";
     }
     
     
@@ -382,6 +390,35 @@ Conexion cc=new Conexion();
             }
     
     }//mostrar expediente
+       
+    public void deshabilitarCampos(){
+        txtId.setEnabled(false);
+        txtId.setEditable(false);
+        
+        jTextField1.setEnabled(false);
+        jTextField1.setEditable(false);
+        
+        jTextField2.setEnabled(false);
+        jTextField2.setEditable(false);
+        
+        jTextField3.setEnabled(false);
+        jTextField3.setEditable(false);
+        
+        jTextField4.setEnabled(false);
+        jTextField4.setEditable(false);
+        
+        jTextField5.setEnabled(false);
+        jTextField5.setEditable(false);
+        
+        jTextField6.setEnabled(false);
+        jTextField6.setEditable(false);
+        
+        jTextPane1.setEnabled(false);
+        jTextPane1.setEditable(false);
+        
+        jTextPane2.setEnabled(false);
+        jTextPane2.setEditable(false);
+    }
     /**
      * @param args the command line arguments
      */
