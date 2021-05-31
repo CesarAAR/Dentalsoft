@@ -189,8 +189,6 @@ public class Citas extends javax.swing.JFrame {
              case 0:
                 try {
                     AgregarCita();
-                    JOptionPane.showMessageDialog(null, "Se Creo la cita de forma exitosa");
-                    limpiarCampos();
                 } catch (ParseException ex) {
                     Logger.getLogger(Citas.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -236,8 +234,6 @@ public class Citas extends javax.swing.JFrame {
         Date fecha1 = sdf.parse(fechaComoCadena);
         Date fecha2 = sdf.parse(dateAA);
         String Hora = jComboBox2.getSelectedItem().toString();
-        int bR=JOptionPane.showConfirmDialog(null,"¿AGREGAR Registro?","AGREGAR",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-        if(bR==JOptionPane.YES_NO_OPTION){
         if(fecha1.equals(fecha2)){
             JOptionPane.showMessageDialog(null, "Fecha no valida");
             
@@ -278,7 +274,6 @@ public class Citas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Error en el registro"+e.getMessage());
             }
         }
-       }
     }
     
    

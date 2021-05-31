@@ -357,7 +357,7 @@ public class GestionCitas extends javax.swing.JFrame {
              switch (resp) {
              case 0:
                 Eliminar();
-                JOptionPane.showMessageDialog(null, "Se Elimino la cita de forma exitosa");
+               
                 limpiarCampos();
                 break;
              case 1:
@@ -383,7 +383,6 @@ public class GestionCitas extends javax.swing.JFrame {
              case 0:
                 try {
                     Actualizar();
-                    JOptionPane.showMessageDialog(null, "Modificacion exitosa");
                     jButton2.setEnabled(true);
                     jButton3.setEnabled(true);
                     jButton4.setEnabled(true);
@@ -463,13 +462,11 @@ public class GestionCitas extends javax.swing.JFrame {
     public void Actualizar() throws ParseException{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String fechaComoCadena = sdf.format(jDateChooser2.getDate());
-        int bR=JOptionPane.showConfirmDialog(null,"¿Actualizar Registro?","ACTUALIZAR",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         Date dateA = new Date();
         String dateAA = sdf.format(dateA);
         Date fecha1 = sdf.parse(fechaComoCadena);
         Date fecha2 = sdf.parse(dateAA);
         String Hora = txtH.getText();
-        if(bR==JOptionPane.YES_NO_OPTION){
             if(fecha1.equals(fecha2)){
                 JOptionPane.showMessageDialog(null, "Fecha no valida");
 
@@ -496,6 +493,7 @@ public class GestionCitas extends javax.swing.JFrame {
                                         +jTextField2.getText()+"',asunto='"+jTextArea1.getText()+"',fecha_cita='"+fechaComoCadena+"',hora_cita='"
                                         +txtH.getText()+"'where id_Cita='"+txtId.getText()+"'");
                                 act.executeUpdate();
+                                JOptionPane.showMessageDialog(null, "Modificacion exitosa");
                                 limpiarCampos();
                                 MostrarCita("");
                         }
@@ -504,23 +502,21 @@ public class GestionCitas extends javax.swing.JFrame {
                         Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-         }
+         
     }
     
     public void Eliminar(){
         int f=Tabla.getSelectedColumn();
         String idCita=Tabla.getValueAt(f,0).toString();
-        int bR=JOptionPane.showConfirmDialog(null,"¿Eliminar Registro?","ELIMINAR",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-         if(bR==JOptionPane.YES_NO_OPTION){
             try {
                 PreparedStatement borrar=con.prepareStatement("Delete from Citas where id_Cita='"+idCita+"'");
                 borrar.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Se Elimino la cita de forma exitosa");
                 MostrarCita("");
                 limpiarCampos();
             } catch (SQLException ex) {
                 Logger.getLogger(GestionCitas.class.getName()).log(Level.SEVERE, null, ex);
             }
-         }
     }
     
     public void datoNo(){

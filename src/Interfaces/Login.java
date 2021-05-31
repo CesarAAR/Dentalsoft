@@ -141,13 +141,16 @@ public class Login extends javax.swing.JFrame {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("select NuevoUsuario from USUARIO WHERE NUSUARIO='"+index+"' and PASS='"+Pass+"'");
                 int nuser;
-                rs.next();
-                nuser = rs.getInt("NuevoUsuario");
-                System.out.println(nuser);
-                if(nuser == 1){
-                    cambiarContra();
-                }else if(nuser == 0){
-                    ValidarUsuario();
+                if(rs.next()){
+                    nuser = rs.getInt("NuevoUsuario");
+                    System.out.println(nuser);
+                    if(nuser == 1){
+                            cambiarContra();
+                    }else if(nuser == 0){
+                            ValidarUsuario();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"ERROR USUARIO NO REGISTRADO");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,7 +181,9 @@ public class Login extends javax.swing.JFrame {
         int res=0;
         String TipoU=(String)jComboBox1.getSelectedItem();
         String Pass= jTextField2.getText();
-        String cos="select * from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'";
+        int u1=1;
+        int u0=0;
+        String cos="select NUSUARIO,PASS from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'";
         try{
             Statement st=con.createStatement();
             ResultSet rs=st.executeQuery(cos);
