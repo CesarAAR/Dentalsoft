@@ -33,6 +33,7 @@ Conexion cc=new Conexion();
     public Historial() {
         initComponents();
          MostrarHistorial("");
+         deshabilitarCampos();
     }
 
     /**
@@ -44,6 +45,7 @@ Conexion cc=new Conexion();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         txtBNombre = new javax.swing.JTextField();
@@ -71,7 +73,6 @@ Conexion cc=new Conexion();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
         jLabel7 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -80,6 +81,7 @@ Conexion cc=new Conexion();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 730));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 200, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,9 +219,6 @@ Conexion cc=new Conexion();
         jLabel7.setText("Fecha:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, -1, -1));
 
-        jDateChooser2.setEnabled(false);
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 200, -1));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Expediente");
@@ -285,7 +284,7 @@ Conexion cc=new Conexion();
          txtId.setText(Tabla.getValueAt(fila, 0).toString());
          String fechas= (String) Tabla.getModel().getValueAt(fila, 1);
          SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        jDateChooser2.setDate(df.parse(fechas));
+        jDateChooser1.setDate(df.parse(fechas));
         jTextField1.setText(Tabla.getValueAt(fila, 2).toString());
         jTextField2.setText(Tabla.getValueAt(fila,3).toString());
         jTextField3.setText(Tabla.getValueAt(fila, 4).toString());
@@ -376,6 +375,9 @@ Conexion cc=new Conexion();
         jTextPane1.setEnabled(false);
         jTextPane1.setEditable(false);
         
+        jDateChooser1.setEnabled(false);
+        jDateChooser1.setFocusable(false);
+        
         jTextPane2.setEnabled(false);
         jTextPane2.setEditable(false);
     }
@@ -418,7 +420,7 @@ Conexion cc=new Conexion();
     private javax.swing.JTable Tabla;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

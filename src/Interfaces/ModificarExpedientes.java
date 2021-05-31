@@ -818,99 +818,183 @@ String mareos="",otros="",bricomania="",contraccion="",mordida="",bucal="";
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void ESMALTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ESMALTEMouseClicked
-        esmalte="Esmalte";
+        if(ESMALTE.isSelected()==true){
+            esmalte="Esmalte";
+        }else{
+            esmalte="";
+        }
     }//GEN-LAST:event_ESMALTEMouseClicked
 
     private void DENTINAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DENTINAMouseClicked
-        dentina=", Dentina";
+        if(DENTINA.isSelected()==true){
+            dentina=", Dentina";
+        }else{
+            dentina="";
+        }
     }//GEN-LAST:event_DENTINAMouseClicked
 
     private void RAIZMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RAIZMouseClicked
-        raiz=", Raiz";
+       if(RAIZ.isSelected()==true){
+            raiz=", Raiz";
+        }else{
+            raiz="";
+        }
     }//GEN-LAST:event_RAIZMouseClicked
 
     private void HUESOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HUESOSMouseClicked
-        huesos=", Huesos";
+       if(HUESOS.isSelected()==true){
+            huesos=", Huesos";
+        }else{
+            huesos="";
+        }
     }//GEN-LAST:event_HUESOSMouseClicked
 
     private void HUESOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HUESOSActionPerformed
-        huesos=", Huesos";
+        //huesos=", Huesos";
     }//GEN-LAST:event_HUESOSActionPerformed
 
     private void ENCIAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ENCIAMouseClicked
-        encia=", Encia";
+        if(ENCIA.isSelected()==true){
+            encia=", Encia";
+        }else{
+            encia="";
+        }
     }//GEN-LAST:event_ENCIAMouseClicked
 
     private void VELOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VELOMouseClicked
-        velo=", Velo";
+        if(VELO.isSelected()==true){
+            velo=", Velo";
+        }else{
+            velo="";
+        }
     }//GEN-LAST:event_VELOMouseClicked
 
     private void INSERCIONMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_INSERCIONMouseClicked
-        insercion=", Insercion";
+        if(INSERCION.isSelected()==true){
+            insercion=", Insercion";
+        }else{
+            insercion="";
+        }
     }//GEN-LAST:event_INSERCIONMouseClicked
 
     private void CARRILLOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CARRILLOSMouseClicked
-        carrillos=", Carrillos";
+        if(CARRILLOS.isSelected()==true){
+            carrillos=", Carrillos";
+        }else{
+            carrillos="";
+        }
     }//GEN-LAST:event_CARRILLOSMouseClicked
 
     private void DESMAYOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DESMAYOSMouseClicked
-        desmayos=", Desmayos";
+        if(DESMAYOS.isSelected()==true){
+            desmayos=", Desmayos";
+        }else{
+            desmayos="";
+        }
     }//GEN-LAST:event_DESMAYOSMouseClicked
 
     private void EMBARAZADAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EMBARAZADAMouseClicked
-        embarazada=", Embarazada";
+        if(EMBARAZADA.isSelected()==true){
+            embarazada=", Embarazada";
+        }else{
+            embarazada="";
+        }
     }//GEN-LAST:event_EMBARAZADAMouseClicked
 
     private void ONOCLUSIONMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ONOCLUSIONMouseClicked
-        onoclusion=", Onoclusion";
+        if(ONOCLUSION.isSelected()==true){
+            onoclusion=", Onoclusion";
+        }else{
+            onoclusion="";
+        }
     }//GEN-LAST:event_ONOCLUSIONMouseClicked
 
     private void MAREOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MAREOSMouseClicked
-        mareos=", Mareos";
+       if(MAREOS.isSelected()==true){
+            mareos=", Mareos";
+        }else{
+            mareos="";
+        }
     }//GEN-LAST:event_MAREOSMouseClicked
 
     private void MAREOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAREOSActionPerformed
-    mareos=", Mareos";
+    //mareos=", Mareos";
     }//GEN-LAST:event_MAREOSActionPerformed
 
     private void OTROSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OTROSMouseClicked
-        otros=", Otros";
+        if(OTROS.isSelected()==true){
+            otros=", Otros";
+        }else{
+            otros="";
+        }
     }//GEN-LAST:event_OTROSMouseClicked
 
     private void SOBREMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SOBREMouseClicked
-       sobre=", Sobre mordida vertical";
+       if(SOBRE.isSelected()==true){
+            sobre=", Sobre mordida vertical";
+       }else{
+           sobre="";
+       }
     }//GEN-LAST:event_SOBREMouseClicked
 
     private void DESGASTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DESGASTEMouseClicked
-        desgaste=", Desgaste"; 
+        if(DESGASTE.isSelected()==true){
+            desgaste=", Desgaste"; 
+        }else{
+            desgaste="";
+        }
     }//GEN-LAST:event_DESGASTEMouseClicked
 
     private void INTERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_INTERMouseClicked
-        
+        if(INTER.isSelected()==true){
+            intercuspideo= ", Intercuspideo";
+        }else{
+            intercuspideo= "";
+        }
     }//GEN-LAST:event_INTERMouseClicked
 
     private void VERTIGOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VERTIGOSMouseClicked
-        vertigos=", Vertigos";
+         if(VERTIGOS.isSelected()==true){
+            vertigos=", Vertigos";
+        }else{
+            vertigos="";
+        }
     }//GEN-LAST:event_VERTIGOSMouseClicked
 
     private void BRICOMANIAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BRICOMANIAMouseClicked
-       bricomania=", Bricomania";
+       if(BRICOMANIA.isSelected()==true){
+            bricomania=", Bricomania";
+       }else{
+           bricomania="";
+       }
     }//GEN-LAST:event_BRICOMANIAMouseClicked
 
     private void MORDIDAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MORDIDAMouseClicked
-        mordida=", Habitos de Mordida";
+        if(MORDIDA.isSelected()==true){
+            mordida=", Habitos de Mordida";
+        }else{
+            mordida="";
+        }
     }//GEN-LAST:event_MORDIDAMouseClicked
 
     private void CONTRACCIONESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CONTRACCIONESMouseClicked
-        contraccion=", Contracciones musculares";
+        if(CONTRACCIONES.isSelected()==true){
+            contraccion=", Contracciones musculares";
+        }else{
+            contraccion="";
+        }
     }//GEN-LAST:event_CONTRACCIONESMouseClicked
 
     private void BUCALMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BUCALMouseClicked
-        bucal=", Respiracion bucal";
+        if(BUCAL.isSelected()==true){
+            bucal=", Respiracion bucal";
+        }else{
+            bucal="";
+        }
     }//GEN-LAST:event_BUCALMouseClicked
 
     private void ESMALTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ESMALTEActionPerformed
-        esmalte="Esmalte";
+        //esmalte="Esmalte";
     }//GEN-LAST:event_ESMALTEActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1220,6 +1304,11 @@ raiz=", Raiz";
         jTextField3.setText(Tabla.getValueAt(fila, 3).toString());
         jTextField4.setText(Tabla.getValueAt(fila, 4).toString());
         jTextField5.setText(Tabla.getValueAt(fila, 5).toString());
+        if(Tabla.getValueAt(fila, 5).toString()=="Masculino"){
+            jComboBox1.setSelectedIndex(1);
+        }else{
+            jComboBox1.setSelectedIndex(2);
+        }
         jTextPane2.setText(Tabla.getValueAt(fila, 6).toString());
         jTextPane3.setText(Tabla.getValueAt(fila, 7).toString());
         
