@@ -234,7 +234,10 @@ public class Citas extends javax.swing.JFrame {
         Date fecha1 = sdf.parse(fechaComoCadena);
         Date fecha2 = sdf.parse(dateAA);
         String Hora = jComboBox2.getSelectedItem().toString();
-        if(fecha1.equals(fecha2)){
+        if(jTextField1.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Ingrese nombre");
+        }
+        else if(fecha1.equals(fecha2)){
             JOptionPane.showMessageDialog(null, "Fecha no valida");
             
         }
