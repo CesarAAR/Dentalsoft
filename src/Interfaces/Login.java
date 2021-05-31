@@ -41,71 +41,86 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JPasswordField();
         background_login = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(557, 379));
         setMinimumSize(new java.awt.Dimension(557, 379));
-        setPreferredSize(new java.awt.Dimension(557, 370));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Salir");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 430, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Ingresar");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 430, -1, -1));
+
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setText("Salir");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton 1.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton presionado.png"))); // NOI18N
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton seleccionado.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 100, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 162, 37));
 
-        jButton2.setText("Ingresar");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton 1.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton presionado.png"))); // NOI18N
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton seleccionado.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 100, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 162, 40));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DOCTORA", "ASISTENTE" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 190, -1));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, 190, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel4.setText("PASSWORD");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("LOGIN");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 60, 20));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DXDDDXDDXD.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 40));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lock_48px.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel5.setText("USERNAME");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/user_100px.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 190, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 190, -1));
 
-        background_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/background_2.jpg"))); // NOI18N
+        background_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo Login.jpg"))); // NOI18N
         background_login.setMaximumSize(new java.awt.Dimension(557, 379));
         background_login.setMinimumSize(new java.awt.Dimension(557, 379));
-        getContentPane().add(background_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
+        getContentPane().add(background_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,12 +130,32 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ValidarUsuario();
-        cambiarContra();
+        validarNuevoUser();
     }//GEN-LAST:event_jButton2ActionPerformed
     
+    
+    public void validarNuevoUser(){
+        try {
+                String index = (String)jComboBox1.getSelectedItem();
+                String Pass = jTextField2.getText();  
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("select NuevoUsuario from USUARIO WHERE NUSUARIO='"+index+"' and PASS='"+Pass+"'");
+                int nuser;
+                rs.next();
+                nuser = rs.getInt("NuevoUsuario");
+                System.out.println(nuser);
+                if(nuser == 1){
+                    cambiarContra();
+                }else if(nuser == 0){
+                    ValidarUsuario();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
     public void cambiarContra(){
-        String Pass= "123 ";
+        String Pass= jTextField2.getText();
         nCotra nc=new nCotra();  
         String TipoU=(String)jComboBox1.getSelectedItem();
         String cos="select PASS from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'";
@@ -128,7 +163,6 @@ public class Login extends javax.swing.JFrame {
                 Statement st = con.createStatement();                                        
                 ResultSet rs = st.executeQuery(cos);
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(null,"Por motivos de seguridad le pedimos que actualize la contraseña");
                     nc.setVisible(true);
                     
                 }   
@@ -142,13 +176,9 @@ public class Login extends javax.swing.JFrame {
     
     public void ValidarUsuario(){
         int res=0;
-        IntDocPrincipal abrirventanaDoc = new IntDocPrincipal(); //instanciamos un objeto de la clase Doctor
-        IntAsisPrincipal abrirventanaAsistent = new IntAsisPrincipal(); //instanciamos un objeto de la clase Asistente
         String TipoU=(String)jComboBox1.getSelectedItem();
         String Pass= jTextField2.getText();
         String cos="select * from USUARIO WHERE NUSUARIO='"+TipoU+"' and PASS='"+Pass+"'";
-        
-        
         try{
             Statement st=con.createStatement();
             ResultSet rs=st.executeQuery(cos);
@@ -158,10 +188,12 @@ public class Login extends javax.swing.JFrame {
                     if(res==1){
                          if(TipoU.equals("DOCTORA")){
                                  JOptionPane.showMessageDialog(null,"BIENVENIDO DOCTORA");
+                                 IntDocPrincipal abrirventanaDoc = new IntDocPrincipal(); //instanciamos un objeto de la clase Doctor
                                  abrirventanaDoc.setVisible(true);
                                  dispose();
                         }else if(TipoU.equals("ASISTENTE")){
                                  JOptionPane.showMessageDialog(null,"BIENVENIDO ASISTENTE");
+                                 IntAsisPrincipal abrirventanaAsistent = new IntAsisPrincipal(); //instanciamos un objeto de la clase Asistente
                                  abrirventanaAsistent.setVisible(true);
                                  dispose();
                         }
@@ -179,6 +211,10 @@ public class Login extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

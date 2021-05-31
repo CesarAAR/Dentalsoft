@@ -18,7 +18,7 @@ public class Conexion {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url= "jdbc:sqlserver://localhost:1433;databaseName=DENTALSOFT";
-            con =(Connection) DriverManager.getConnection(url, "sa", "3141592");
+            con =(Connection) DriverManager.getConnection(url, "sa", "asdfasdf123");
             System.out.println("Conexion exitosa");
             
         }
